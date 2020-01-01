@@ -38,5 +38,20 @@ namespace TextVerified
             Console.WriteLine(results);
             return results;
         }
+
+        public static dynamic DoNumber(string requesturl, string bearertoken, string smsmode)
+        {
+            var client = new RestClient(requesturl);
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Authorization", "Bearer " + bearertoken);
+            request.AddParameter("application/json", "{\"id\": "+ smsmode +"}", ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+
+            dynamic results = JsonConvert.DeserializeObject(response.Content);
+            Console.WriteLine(results);
+            return results;
+        }
     }
 }
