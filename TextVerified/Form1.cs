@@ -25,7 +25,6 @@ namespace TextVerified
 
         private void getBalance_Click(object sender, EventArgs e)
         {
-            populate();
             tokenkey = Program.Base64Encode(apiKey.Text + ":" + apiSecret.Text);
             string token = TextverifiedAPI.DoAuth("https://www.textverified.com/api/Authentication", tokenkey);
             dynamic response = TextverifiedAPI.DoPost("https://www.textverified.com/api/Users", token, "GET");
