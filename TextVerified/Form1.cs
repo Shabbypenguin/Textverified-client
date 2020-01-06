@@ -73,25 +73,27 @@ namespace TextVerified
                 if (smsvalue == true)
                 {
                     dynamic response = TextverifiedAPI.DoNumber("https://www.textverified.com/api/Verifications", token, "49");
-                    MessageBox.Show("Number is: " + response.number);
+                    Clipboard.SetText(response.number.ToString());
+                    outputBox.Text=("Number is: " + response.number + Environment.NewLine);
                     string id = response.id;
                     do
                     {
-                        Thread.Sleep(4000);
+                        Task.Delay(1200);
                         response = TextverifiedAPI.DoPost("https://www.textverified.com/api/Verifications/" + id, token, "GET");
                     } while (response.sms == "");
-                    outputBox.Text = response.sms;
+                    outputBox.AppendText(response.sms.ToString());
                 }
                 else{
                     dynamic response = TextverifiedAPI.DoNumber("https://www.textverified.com/api/Verifications", token, "47");
-                    MessageBox.Show("Number is: " + response.number);
+                    Clipboard.SetText(response.number.ToString());
+                    outputBox.Text = ("Number is: " + response.number + Environment.NewLine);
                     string id = response.id;
                     do
                     {
-                        Thread.Sleep(4000);
+                        Task.Delay(1200);
                         response = TextverifiedAPI.DoPost("https://www.textverified.com/api/Verifications/" + id, token, "GET");
                     } while (response.sms == "");
-                    outputBox.Text = response.sms;
+                    outputBox.AppendText(response.sms.ToString());
                 }
             }
         }
